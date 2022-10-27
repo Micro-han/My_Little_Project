@@ -17,9 +17,10 @@ model_cp = './model/'
 workers = 10
 batch_size = 16
 lr = 0.0001
-n_epoch = 10
+n_epoch = 2
 model_file = './model/model.pth'
 test_dir = './test/'
+IMAGE_SIZE = 200
 
 
 def train():
@@ -47,7 +48,7 @@ def train():
             optimizer.zero_grad()
             cnt += 1
             print('Epoch: {0}, Frame: {1}, train_loss: {2}'.format(epoch, cnt * batch_size, loss / batch_size))
-    torch.save(model.state_dict(), '{0}/model.pth'.format(model_cp))
+    torch.save(model.state_dict(), '{0}model.pth'.format(model_cp))
 
 
 def test():
@@ -57,15 +58,21 @@ def test():
     model = nn.DataParallel(model)
     model.load_state_dict(torch.load(model_file))
     model.eval()
-    files = [file for file in os.listdir(test_dir)]
+
+    files = []
     imgs = []
     imgs_data = []
-    for file in files:
-        img = Image.open(test_dir + file)
+    for file in os.listdir(test_dir):
+        if file == '.DS_Store':
+            continue
+        files.append(file)
+        img = Image.open(test_dir + file).resize((IMAGE_SIZE, IMAGE_SIZE)).convert('RGB')
         img_data = getdata.dataTransform(img)
 
         imgs.append(img)
         imgs_data.append(img_data)
+
+    imgs_data = torch.stack(imgs_data)
 
     out = model(imgs_data)
     out = F.softmax(out, dim=1)

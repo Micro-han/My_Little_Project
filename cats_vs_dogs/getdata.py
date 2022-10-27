@@ -7,7 +7,7 @@ import torchvision.transforms as transforms
 IMAGE_SIZE = 200
 
 dataTransform = transforms.Compose([
-    transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
+    transforms.Resize(IMAGE_SIZE),
     transforms.CenterCrop((IMAGE_SIZE, IMAGE_SIZE)),
     transforms.ToTensor()
 ])
