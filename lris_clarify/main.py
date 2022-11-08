@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 lr = 0.0001
 n_epochs = 10
 
+
 class Net(nn.Module):
     def __init__(self, input_num, output_num, hidden_num):
         super(Net, self).__init__()
