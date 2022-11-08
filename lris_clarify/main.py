@@ -11,15 +11,15 @@ n_epochs = 10
 class Net(nn.Module):
     def __init__(self, input_num, output_num, hidden_num):
         super(Net, self).__init__()
-        self.fc1 = nn.Linear(input_num, hidden_num)
-        self.fc2 = nn.Linear(hidden_num, output_num)
-        self.relu = nn.ReLU()
+        self.net = nn.Sequential(
+            nn.Linear(input_num, hidden_num),
+            nn.ReLU(),
+            nn.Linear(hidden_num, output_num)
+        )
 
     def forward(self, x):
-        x = self.fc1(x)
-        x = self.relu(x)
-        x = self.fc2(x)
-        return x
+        y = self.net(x)
+        return y
 
 
 def train(x_train, x_test, y_train, y_test):
