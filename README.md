@@ -51,3 +51,21 @@
 - 比较折磨的部分是使用QT写一个画图板和将QImage转换成Image格式。
 
 - [代码参考自该链接](https://github.com/1240117300/MINIST)
+
+## RL Demos
+
+- 强化学习入门算法及Gym简单环境，代码大部分来自于《Python强化学习实战》
+
+- BLACKJACK ：蒙特卡洛方法和QLearning在线学习
+
+  CartPole：DQN，本来想改成Torch版本，TODO
+
+  DoomGame：使用DQN来实现一个射击游戏的小demo，TODO
+
+  FrozenLake：策略迭代和价值迭代两种方法
+
+  Mspacman：使用DQN实现吃豆人小游戏
+
+  Taxi：使用QLearing和SARSA算法解决
+
+- 强化学习是大四看的比较多的东西，这些环境和算法都是强化学习入门的基础环境和算法，SOTA方案大都已经给出，日后有空再继续钻研吧
