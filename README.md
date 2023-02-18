@@ -74,3 +74,22 @@
 
 - 用于将pcd格式点云转换为S3DIS格式
 - 仅需修改路径即可
+
+## face_recognition
+
+- 文件结构如下
+
+  ```python
+  -----
+   |_ data
+      |_ num_name_id.jpg
+   |_ train
+      |_ trainer.yml
+   main.py
+   test.png
+   test.mp4
+  ```
+
+- 使用cv2接口来实现人脸识别demo，可以做到：识别出图中单/多人脸，视频人脸识别，录入个人人脸信息并识别出人脸信息属于谁
+
+- 玩具项目不追求精度和前端
