@@ -50076,3 +50076,4 @@ pcd_data_changer/.idea/vcs.xml
 pcd_data_changer/.idea/misc.xml
 pcd_data_changer/.idea/inspectionProfiles/Project_Default.xml
 pcd_data_changer/.idea/inspectionProfiles/profiles_settings.xml
+*.pyc
