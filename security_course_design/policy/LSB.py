@@ -41,11 +41,11 @@ def set_msg_img(lsb0_img, water_img):
 
 def encode_img(img, secret_text):
     water_img = draw_water_img(img.size, img.mode, secret_text)
-    # water_img.save('water_img.jpg')
+
     lsb0_img = make_bit_0(img)
-    # lsb0_img.save('lsb0.jpg')
+
     out_img = set_msg_img(lsb0_img, water_img)
-    # out_img.save('out_img.jpg')
+
     return out_img
 
 
@@ -60,9 +60,11 @@ def decode_img(img):
 
 if __name__ == '__main__':
     secret_text = input()
-    img = Image.open("../sources/test.jpg")
+    img = Image.open("../sources/test.png").convert("RGB")
     img = img.resize((512, 512))
     lsb_img = encode_img(img, secret_text)
-    decode_one = decode_img(lsb_img)
-    lsb_img.save('encode.jpg')
-    decode_one.save('decode.jpg')
+    lsb_img.save('encode.png')
+
+    lsb2_img = Image.open("../policy/encode.png").convert("RGB")
+    decode_one = decode_img(lsb2_img)
+    decode_one.save('decode.png')
