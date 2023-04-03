@@ -13,14 +13,14 @@
 
   [宝可梦数据库网站](https://pokemondb.net/pokedex/all)
 
-## SearchPlanning
+## search_planning
 
 - 在别人写好的可视化迷宫框架里写一个自己的自动寻路Robot
 - 分为单目标和多目标两种情况，单目标情况为一个出发点和一个终点，多目标情况为一个出发点和多个终点，需要依次到达且总步数尽可能短
 - 代码文件结构：重点需要关注的是`Environment.java`，`Robot.java`，`Position.java`和`VisualizeSimulation.java`；其中`Position.java`为迷宫里点的类，`Environment.java`为迷宫环境类，`VisualizeSimulation.java`为可视化的程序。我们只需要修改`Robot.java`即可。
 - 使用BFS和Astar来求解，单目标就不说了。对于多目标的情况：BFS每到达的第一个目标点，就以该点为新的起点继续进行BFS；Astar则是每次计算所有目标点到起点的评价函数值，选择最优的一个作为此轮的终点和下一轮的起点，重复即可。
 
-## CatsVSDogs
+## cats_vs_dogs
 
 - 猫狗识别，非常简单的入门级别项目，本项目采用torch框架开发
 - 处理图像数据：Resize图像、读入图像标签 转换成tensor张量供训练
@@ -52,7 +52,7 @@
 
 - [代码参考自该链接](https://github.com/1240117300/MINIST)
 
-## RL Demos
+## rl_demos
 
 - 强化学习入门算法及Gym简单环境，代码大部分来自于《Python强化学习实战》
 
@@ -93,3 +93,12 @@
 - 使用cv2接口来实现人脸识别demo，可以做到：识别出图中单/多人脸，视频人脸识别，录入个人人脸信息并识别出人脸信息属于谁
 
 - 玩具项目不追求精度和前端
+
+## lris_clarify
+
+## Img_security
+
+- 计算机网络安全课程设计的代码，主要关于图像隐写术
+- 前端使用Pyqt5实现，涉及到的图像隐写技术：LSB
+- TODO：结课前应该加上和深度学习相关的图像隐写算法
+
