@@ -72,7 +72,8 @@
 
 ## pcd_DataChanger
 
-- 用于将pcd格式点云转换为S3DIS格式
+- **main**：用于pcd格式点云转换为S3DIS格式
+- **randomSampling**：随机丢弃75%的点，针对大点云
 - 仅需修改路径即可
 
 ## face_recognition
