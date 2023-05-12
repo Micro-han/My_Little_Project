@@ -1,5 +1,5 @@
-import reversi.common as common
-from reversi.common import *
+import common
+from common import *
 
 
 class game_model:

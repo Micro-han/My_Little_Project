@@ -67,6 +67,7 @@ def redrawWindow(win, game, p):
                 text2 = font.render("Locked In", 1, (0, 0, 0))
             else:
                 text2 = font.render("Waiting...", 1, (0, 0, 0))
+
         if p == 1:
             win.blit(text2, (100, 350))
             win.blit(text1, (400, 350))
@@ -78,6 +79,7 @@ def redrawWindow(win, game, p):
             btn.draw(win)
 
     pygame.display.update()
+
 
 btns = [Button("Rock", 50, 500, (0,0,0)), Button("Scissors", 250, 500, (255,0,0)), Button("Paper", 450, 500, (0,255,0))]
 def main():
@@ -157,7 +159,5 @@ def menu_screen():
 
     main()
 
-if __name__ == '__main__':
-
-    while True:
-        menu_screen()
+while True:
+    menu_screen()

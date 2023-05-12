@@ -1,11 +1,11 @@
 import pygame
 import random
-import reversi.view as view
-import reversi.board as board
-import reversi.common as common
-from reversi.view import *
-from reversi.board import *
-from reversi.common import *
+import view
+import board
+import common
+from view import *
+from board import *
+from common import *
 
 
 class game_manager:
@@ -44,6 +44,7 @@ class game_manager:
                     break
 
             if self.game_mode[self.current_playing] == "Human":
+                # change this for socket
                 valid_moves = self.board.get_valid_moves(self.current_playing)
 
                 clicked_cell = self.window.game_screen(self.board.grid, True)

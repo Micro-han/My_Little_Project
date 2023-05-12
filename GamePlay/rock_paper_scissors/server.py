@@ -3,8 +3,8 @@ from _thread import *
 import pickle
 from game import Game
 
-server = "10.11.250.207"
-port = 5555
+server = "100.80.199.200"
+port = 5550
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -12,6 +12,7 @@ try:
     s.bind((server, port))
 except socket.error as e:
     str(e)
+    print(e)
 
 s.listen(2)
 print("Waiting for a connection, Server Started")
@@ -19,6 +20,7 @@ print("Waiting for a connection, Server Started")
 connected = set()
 games = {}
 idCount = 0
+
 
 def threaded_client(conn, p, gameId):
     global idCount
@@ -55,21 +57,21 @@ def threaded_client(conn, p, gameId):
     idCount -= 1
     conn.close()
 
-if __name__ == '__main__':
-
-    while True:
-        conn, addr = s.accept()
-        print("Connected to:", addr)
-
-        idCount += 1
-        p = 0
-        gameId = (idCount - 1)//2
-        if idCount % 2 == 1:
-            games[gameId] = Game(gameId)
-            print("Creating a new game...")
-        else:
-            games[gameId].ready = True
-            p = 1
 
 
-        start_new_thread(threaded_client, (conn, p, gameId))
+while True:
+    conn, addr = s.accept()
+    print("Connected to:", addr)
+
+    idCount += 1
+    p = 0
+    gameId = (idCount - 1)//2
+    if idCount % 2 == 1:
+        games[gameId] = Game(gameId)
+        print("Creating a new game...")
+    else:
+        games[gameId].ready = True
+        p = 1
+
+
+    start_new_thread(threaded_client, (conn, p, gameId))

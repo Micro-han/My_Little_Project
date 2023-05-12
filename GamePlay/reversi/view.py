@@ -1,7 +1,7 @@
 import pygame
 import time
-import reversi.common as common
-from reversi.common import *
+import common
+from common import *
 
 
 class game_interface:
@@ -48,16 +48,16 @@ class game_interface:
 
             self.game_display.blit(game_title, game_title_pos)
 
-            # mode1_clicked = self.add_button("1 Player", 100, 350, 100, 50, \
-            #                                 self.BUTTON_INACTIVE_COLOR, self.BUTTON_ACTIVE_COLOR)
+            mode1_clicked = self.add_button("1 Player", 100, 350, 100, 50, \
+                                            self.BUTTON_INACTIVE_COLOR, self.BUTTON_ACTIVE_COLOR)
             mode2_clicked = self.add_button("Start", 300, 350, 100, 50, \
                                             self.BUTTON_INACTIVE_COLOR, self.BUTTON_ACTIVE_COLOR)
             exit_game_clicked = self.add_button("Exit", 500, 350, 100, 50, \
                                                 self.BUTTON_INACTIVE_COLOR, self.BUTTON_ACTIVE_COLOR)
 
-            # if mode1_clicked == True:
-            #     diff_level = self.get_diff_level()
-            #     return ("Human", "Computer", diff_level)
+            if mode1_clicked == True:
+                diff_level = self.get_diff_level()
+                return ("Human", "Computer", diff_level)
 
             if mode2_clicked == True:
                 return ("Human", "Human", "NONE")
