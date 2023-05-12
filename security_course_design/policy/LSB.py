@@ -14,7 +14,7 @@ def draw_water_img(img_size, img_mode, secret_text):
     cnt = 0
     for i in range(x_per_step):
         for j in range(y_per_step):
-            draw_img.text((i * font_size, j * font_size), secret_text[cnt % message_size], font=ImageFont.truetype("msyh.ttc", font_size), fill="black")
+            draw_img.text((i * font_size, j * font_size), secret_text[cnt % message_size]) # , font=ImageFont.truetype("msyh.ttc", font_size), fill="black")
             cnt += 1
 
     return new_img
