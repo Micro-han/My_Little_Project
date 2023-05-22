@@ -11,6 +11,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
 from policy import LSB
+from policy import mSteganoGAN
 from steganogan import SteganoGAN
 import imageio
 import torch
@@ -34,6 +35,7 @@ class funcWindow(QMainWindow, Ui_mainWindow):
         self.img_path_decode = ""
         self.output_img = None
         self.steganogan = SteganoGAN.load(architecture='dense')
+        self.method = None
 
     def chooseImg(self):
         img_name = QFileDialog.getOpenFileNames(self, '选择图像', os.getcwd())
@@ -72,12 +74,14 @@ class funcWindow(QMainWindow, Ui_mainWindow):
         txt = self.messageLine.text()
         print(txt)
 
-        method = self.methodBox.currentText()
-        if method == "LSB":
+        self.method = self.methodBox.currentText()
+        encode_img = None
+        if self.method == "LSB":
             encode_img = LSB.encode_img(img, txt)
             self.output_img = encode_img
-        elif method == "SteganoGAN":
-            self.steganogan.encode('')
+        elif self.method == "SteganoGAN":
+            self.output_img = mSteganoGAN.my_steganogan_encode(self.steganogan, self.img_path, txt)
+            encode_img = self.output_img
 
         figure = plt.figure()
         canvas = FigureCanvas(figure)
@@ -92,22 +96,29 @@ class funcWindow(QMainWindow, Ui_mainWindow):
 
     def decodeImg(self):
         img = Image.open(self.img_path_decode)
-        lsb_img = LSB.decode_img(img)
+        method = self.methodBox_2.currentText()
+        if method == "LSB":
+            lsb_img = LSB.decode_img(img)
+            figure = plt.figure()
+            canvas = FigureCanvas(figure)
+            plt.imshow(lsb_img)
+            plt.axis('off')
+            canvas.draw()
 
-        figure = plt.figure()
-        canvas = FigureCanvas(figure)
-        plt.imshow(lsb_img)
-        plt.axis('off')
-        canvas.draw()
-
-        scene2 = QGraphicsScene()  # 第三步，创建一个QGraphicsScene，因为加载的图形（FigureCanvas）不能直接放到graphicview控件中，必须先放到graphicScene，然后再把graphicscene放到graphicview中
-        scene2.addWidget(canvas)  # 第四步，把图形放到QGraphicsScene中，注意：图形是作为一个QWidget放到QGraphicsScene中的
-        self.outputView_2.setScene(scene2)  # 第五步，把QGraphicsScene放入QGraphicsView
-        self.outputView_2.show()
+            scene2 = QGraphicsScene()  # 第三步，创建一个QGraphicsScene，因为加载的图形（FigureCanvas）不能直接放到graphicview控件中，必须先放到graphicScene，然后再把graphicscene放到graphicview中
+            scene2.addWidget(canvas)  # 第四步，把图形放到QGraphicsScene中，注意：图形是作为一个QWidget放到QGraphicsScene中的
+            self.outputView_2.setScene(scene2)  # 第五步，把QGraphicsScene放入QGraphicsView
+            self.outputView_2.show()
+        elif method == "SteganoGAN":
+            lsb_img = self.steganogan.decode_image(img)
+            self.outputText.setText(lsb_img)
 
     def downImg(self):
         file_directory = QFileDialog.getExistingDirectory(None, "请选择文件夹路径", "D:/")
-        self.output_img.save(file_directory + "/output.png")
+        if self.method == "LSB":
+            self.output_img.save(file_directory + "/output.png")
+        elif self.method == "SteganoGAN":
+            imwrite(self.output_img, file_directory + "/output.png")
         print(file_directory)
         # return
 
