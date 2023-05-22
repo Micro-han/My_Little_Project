@@ -9,7 +9,14 @@ from ui.mainWindow import Ui_mainWindow
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QGraphicsScene
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
+
 from policy import LSB
+from steganogan import SteganoGAN
+import imageio
+import torch
+from imageio import imread, imwrite
+from torch.nn.functional import binary_cross_entropy_with_logits, mse_loss
+from torch.optim import Adam
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 
@@ -26,6 +33,7 @@ class funcWindow(QMainWindow, Ui_mainWindow):
         self.img_path = ""
         self.img_path_decode = ""
         self.output_img = None
+        self.steganogan = SteganoGAN.load(architecture='dense')
 
     def chooseImg(self):
         img_name = QFileDialog.getOpenFileNames(self, '选择图像', os.getcwd())
@@ -64,8 +72,12 @@ class funcWindow(QMainWindow, Ui_mainWindow):
         txt = self.messageLine.text()
         print(txt)
 
-        encode_img = LSB.encode_img(img, txt)
-        self.output_img = encode_img
+        method = self.methodBox.currentText()
+        if method == "LSB":
+            encode_img = LSB.encode_img(img, txt)
+            self.output_img = encode_img
+        elif method == "SteganoGAN":
+            self.steganogan.encode('')
 
         figure = plt.figure()
         canvas = FigureCanvas(figure)
