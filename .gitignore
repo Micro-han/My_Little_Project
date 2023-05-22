@@ -50077,3 +50077,8 @@ pcd_data_changer/.idea/misc.xml
 pcd_data_changer/.idea/inspectionProfiles/Project_Default.xml
 pcd_data_changer/.idea/inspectionProfiles/profiles_settings.xml
 *.pyc
+security_course_design/policy/decode.png
+security_course_design/policy/encode.png
+security_course_design/sources/output.png
+security_course_design/sources/test_out.png
+*.png
